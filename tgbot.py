@@ -5,13 +5,18 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 import google.generativeai as genai
 
 # Initialize Telegram Bot
-TELEGRAM_TOKEN = "8004968195:AAGQge52a3dobbPuTTRlg06oXz50m_ciFuY"
+TELEGRAM_TOKEN = "8004968195:AAHnh7YmF2rKOu8xpjD4QJjtvoMAR_S5K8U"  # Replace with your new token
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 # Configure Gemini
-GEMINI_API_KEY = "AIzaSyD3Ltks10HNcg5Xy3-8m5MHxP2smYNpoxU"
+GEMINI_API_KEY = "AIzaSyD3Ltks10HNcg5Xy3-8m5MHxP2smYNpoxU"  # Replace with your new key
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-pro')
+
+# Use the current model name - try these options:
+# "gemini-1.5-flash" (fastest)
+# "gemini-1.5-pro" (more capable)
+# "gemini-1.0-pro" (original)
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('Hello! I\'m your Gemini AI assistant. Send me a message and I\'ll respond.')
@@ -37,8 +42,6 @@ def main():
     
     # Messages
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    
-    # Errors
     
     # Polling
     print("Polling...")
